@@ -20,7 +20,10 @@ test('the package exposes a loadable dsh host and web-client bundle', async () =
   assert.equal(lock.packages[''].version, manifest.version)
   assert.equal(manifest.dsh?.bundle?.patch, './cordis.patch.yml')
   assert.equal(manifest.dsh?.client?.platform, 'web')
-  assert.deepEqual(manifest.dsh?.client?.inject, ['@deepseek-ai/dsh-client-ui-settings-plugins'])
+  assert.deepEqual(manifest.dsh?.client?.inject, [
+    '@deepseek-ai/dsh-client-ui-plugin-manager',
+    '@deepseek-ai/dsh-client-ui-settings',
+  ])
   assert.equal(typeof manifest.exports?.['.'], 'string')
   assert.equal(typeof manifest.exports?.['./client'], 'string')
   assert.equal(typeof manifest.exports?.['./package.json'], 'string')

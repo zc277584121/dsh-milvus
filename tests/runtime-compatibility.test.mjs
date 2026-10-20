@@ -4,15 +4,22 @@ import test from 'node:test'
 
 const packageUrl = new URL('../package.json', import.meta.url)
 
-test('the public Desktop and Web onboarding path requires the dsh 0.2 runtime contracts', async () => {
+test('the plugin follows the compatible pre-1.0 dsh host contract', async () => {
   const manifest = JSON.parse(await readFile(packageUrl, 'utf8'))
+
+  assert.equal(manifest.engines.dsh, '>=0.2.0-rc.2 <1.0.0-0')
 
   for (const name of [
     '@deepseek-ai/dsh-client-connection',
     '@deepseek-ai/dsh-settings',
     '@deepseek-ai/dsh-credentials',
     '@deepseek-ai/dsh-tools',
-  ]) assert.equal(manifest.peerDependencies[name], '0.2.0-rc.2')
-  assert.equal(manifest.peerDependencies['@deepseek-ai/cordis'], '~4.0.4')
-  assert.equal(manifest.peerDependencies['@deepseek-ai/schemastery'], '~3.18.4')
+  ]) {
+    assert.equal(manifest.peerDependencies[name], '*')
+    assert.equal(manifest.peerDependenciesMeta[name]?.optional, true)
+    assert.equal(manifest.devDependencies[name], 'next')
+  }
+
+  assert.equal(manifest.peerDependencies['@deepseek-ai/cordis'], '^4.0.1')
+  assert.equal(manifest.peerDependencies['@deepseek-ai/schemastery'], '^3.18.1')
 })
