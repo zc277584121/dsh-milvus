@@ -909,8 +909,8 @@ globalThis.__ModuleLoader__.load({
         )
         installStyles(ctx)
         ctx.effect(() => ctx.remote.$on('credentials/updated', (ref) => controller.refreshCredential(ref)), 'dsh-milvus: credential status refresh')
-        ctx.slots.inject('settings.plugins.tab', () => ctx.slots.register({
-          name: 'settings.plugins.tab', id: 'dsh-milvus', order: 20, label: 'Milvus', inject: () => ({ controller }),
+        ctx.slots.inject('plugins.bundle.config', () => ctx.slots.register({
+          name: 'plugins.bundle.config', key: '@zilliz/dsh-milvus', inject: () => ({ controller }),
         }, MilvusSettingsCard))
       },
     }

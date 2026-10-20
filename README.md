@@ -11,7 +11,7 @@ create collections, insert data, change indexes, or delete anything.
 
 ## Requirements
 
-- DSH Desktop or Web `0.2.0-rc.2`
+- DSH Desktop or Web `0.2.0-rc.2` or later, before `1.0.0`
 - Node.js 22.19 or later
 - A Milvus HTTP(S) endpoint reachable from the DSH host
 - Optional: an API key from one of the supported embedding providers for dense
@@ -32,8 +32,8 @@ dsh web
 If `dsh` is not installed globally:
 
 ```bash
-npx --yes @deepseek-ai/dsh@0.2.0-rc.2 plugin --profile web add @zilliz/dsh-milvus
-npx --yes @deepseek-ai/dsh@0.2.0-rc.2 web
+npx --yes @deepseek-ai/dsh@latest plugin --profile web add @zilliz/dsh-milvus
+npx --yes @deepseek-ai/dsh@latest web
 ```
 
 After installing or updating the plugin, restart DSH Desktop or Web. Refresh
@@ -41,9 +41,10 @@ the browser page when using Web.
 
 ## Set up the plugin
 
-Open **Settings → Built-in plugins → Milvus**. The setup follows the same order
-as using Milvus: connect a deployment, choose a collection, then enable only
-the search capabilities you need.
+Open **Plugins**, then select **@zilliz/dsh-milvus**. Its configuration appears
+on the plugin details page. The setup follows the same order as using Milvus:
+connect a deployment, choose a collection, then enable only the search
+capabilities you need.
 
 ### Connect Milvus
 
@@ -252,8 +253,9 @@ vector, or a scalar query.
 
 ### The settings card is missing
 
-Confirm that the package is installed in the `web` profile, restart DSH Web,
-and refresh the page:
+Confirm that the package is installed and enabled in the `web` profile,
+restart DSH Web, refresh the page, then open **Plugins →
+@zilliz/dsh-milvus**:
 
 ```bash
 dsh plugin --profile web why @zilliz/dsh-milvus

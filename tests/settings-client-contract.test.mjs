@@ -6,7 +6,7 @@ import vm from 'node:vm'
 const clientUrl = new URL('../client.js', import.meta.url)
 const packageUrl = new URL('../package.json', import.meta.url)
 
-test('the browser bundle registers its Milvus settings card in the dsh plugin settings slot', async () => {
+test('the browser bundle registers its Milvus settings card on the dsh plugin details page', async () => {
   let registration
   const [source, manifestSource] = await Promise.all([
     readFile(clientUrl, 'utf8'),
@@ -75,11 +75,9 @@ test('the browser bundle registers its Milvus settings card in the dsh plugin se
     },
   })
 
-  assert.equal(slotName, 'settings.plugins.tab')
-  assert.equal(entry?.options.name, 'settings.plugins.tab')
-  assert.equal(entry?.options.id, 'dsh-milvus')
-  assert.equal(entry?.options.order, 20)
-  assert.equal(entry?.options.label, 'Milvus')
+  assert.equal(slotName, 'plugins.bundle.config')
+  assert.equal(entry?.options.name, 'plugins.bundle.config')
+  assert.equal(entry?.options.key, '@zilliz/dsh-milvus')
   assert.equal(typeof entry?.component, 'function')
   assert.deepEqual(boundNamespaces, ['dsh-milvus'])
   assert.equal(credentialInvalidation?.event, 'credentials/updated')
